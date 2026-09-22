@@ -1,0 +1,10 @@
+const express = require("express");
+const { requireAuth, requireAdmin } = require("../middlewares/auth.middleware");
+const { getRooms, getRoom, createRoom, updateRoom, deleteRoom } = require("../controllers/room.controller");
+const router = express.Router();
+router.get("/", getRooms);
+router.get("/:id", getRoom);
+router.post("/", requireAuth, requireAdmin, createRoom);
+router.put("/:id", requireAuth, requireAdmin, updateRoom);
+router.delete("/:id", requireAuth, requireAdmin, deleteRoom);
+module.exports = router;
